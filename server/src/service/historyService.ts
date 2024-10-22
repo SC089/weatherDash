@@ -40,9 +40,40 @@ class HistoryService {
     }
   }
   // TODO Define an addCity method that adds a city to the searchHistory.json file
-  // async addCity(city: string) {}
+  public async addCity(cityName: string): Promise<void> {
+    try {
+      const cities = await this.read();
+
+      if (cities.find(city => city.name.toLowerCase() === cityName.toLowerCase())) {
+        console.log(`${cityName} is already in the search history.`);
+        return;
+      }
+
+      const newCity = new City(cityName, cities.length);
+      cities.push(newCity);
+
+      await this.write(cities);
+    } catch (error) {
+      console.error('Error adding city to history:', error);
+    }
+  }
   // * BONUS TODO: Define a removeCity method that removes a city from the searchHistory.json file
-  // async removeCity(id: string) {}
+  public async removeCity(id: string): Promise<void> {
+    try {
+      const cities = await this.read();
+
+      const cityId = parseInt(id, 10);
+      if (isNaN(cityId)) {
+        console.error('Invalid ID');
+        return;
+      }
+      const updatedCities = cities.filter(city => city.id !== cityId);
+
+      await this.write(updatedCities);
+    } catch (error) {
+      console.error('Error removing city from history:', error);
+    }
+  }
 }
 
 export default new HistoryService();
