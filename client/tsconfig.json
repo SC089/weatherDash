@@ -11,5 +11,6 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules", "client", "client/vite.config.js"]
 }
