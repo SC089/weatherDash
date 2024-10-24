@@ -11,7 +11,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // TODO: Serve static files of entire client dist folder
-app.use(express.static(path.join(process.cwd(), '../../client/dist')));
+// app.use(express.static(path.join(process.cwd(), '../../client/dist')));
+const publicPath = path.join(process.cwd(), '../client/dist');
+app.use(express.static(publicPath));
+
+app.get('*', (_, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 // TODO: Implement middleware for parsing JSON and urlencoded form data
 app.use(express.json());
