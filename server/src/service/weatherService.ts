@@ -35,7 +35,7 @@ class WeatherService {
   private async fetchLocationData(city: string): Promise<Coordinates> {
     try {
       const query = this.buildGeocodeQuery(city);
-      const response = await axios.get(`https://api.openweathermap.og/geo/1.0/direct`, {
+      const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct`, {
         params: {
           q: query,
           limit: 1,
