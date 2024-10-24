@@ -9,5 +9,4 @@
     // "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */
   },
   "include": ["src"]
-  "exclude": ["node_modules", "client", "client/vite.config.js"]
 }
