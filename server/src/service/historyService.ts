@@ -1,7 +1,9 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-const historyFilePath = path.join(__dirname, '../routes/data/searchHistory.json');
+
+
+const historyFilePath = path.join(process.cwd(), '../routes/data/searchHistory.json');
 
 // TODO: Define a City class with name and id properties
 class City {
@@ -11,7 +13,7 @@ class City {
 // TODO: Complete the HistoryService class
 class HistoryService {
   // TODO: Define a read method that reads from the searchHistory.json file
-  private async read(): Promise<City[]> {
+  async read(): Promise<City[]> {
     try {
       const data = await fs.readFile(historyFilePath, 'utf8');
       const cities = JSON.parse(data) as City[];
@@ -22,7 +24,7 @@ class HistoryService {
     }
   }
   // TODO: Define a write method that writes the updated cities array to the searchHistory.json file
-  private async write(cities: City[]): Promise<void> {
+  async write(cities: City[]): Promise<void> {
     try {
       await fs.writeFile(historyFilePath, JSON.stringify(cities, null, 2), 'utf8');
     } catch (error) {
